@@ -9,9 +9,30 @@ const initialState = {
   arrayPosition: 0
 };
 
-// REDUCER WILL GO HERE
+// REDUX REDUCER
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "NEXT_LYRIC":
+      let newArrayPosition = state.arrayPosition + 1;
+      let newState = {
+        songLyricsArray: state.songLyricsArray,
+        arrayPosition: newArrayPosition
+      };
+      return newState;
+    default:
+      return state;
+  }
+};
 
-// JEST TESTS + SETUP WILL GO HERE
+// JEST TESTS + SETUP
+const { expect } = window;
+
+expect(reducer(initialState, { type: null })).toEqual(initialState);
+
+expect(reducer(initialState, { type: "NEXT_LYRIC" })).toEqual({
+  songLyricsArray: songLyricsArray,
+  arrayPosition: 1
+});
 
 // REDUX STORE
 const { createStore } = Redux;
